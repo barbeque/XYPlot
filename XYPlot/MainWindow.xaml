@@ -1,0 +1,27 @@
+﻿<Window x:Class="XYPlot.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:XYPlot"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <local:LineVM/>
+    </Window.DataContext>
+    <DockPanel>
+        <lc:CartesianChart DockPanel.Dock="Top">
+            <lc:CartesianChart.AxisX>
+                <lc:Axis Title="Time (seconds)" LabelFormatter="{Binding Path=SecondLookupFormatter}"/>
+            </lc:CartesianChart.AxisX>
+            <lc:CartesianChart.AxisY>
+                <lc:Axis Title="Sales ($)" LabelFormatter="{Binding Path=DollarFormatter}"/>
+            </lc:CartesianChart.AxisY>
+            <lc:CartesianChart.Series>
+                <lc:LineSeries x:Name="_mainSeries" Title="Sales vs. Time" PointForeround="Transparent" Values="{Binding Sales}"/>
+            </lc:CartesianChart.Series>
+        </lc:CartesianChart>
+    </DockPanel>
+</Window>
